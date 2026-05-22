@@ -5,11 +5,13 @@ programa
 
 	funcao  inteiro iniciarJogo(cadeia velha [][], cadeia jogador1, cadeia jogador2, cadeia simbolo1, cadeia simbolo2){
 		inteiro casa
+		
+		faca{
 		escreva("Escolha uma casa de 1 a 9 para marcar ", jogador1,": ")
 		leia(casa)
 		casa = casa - 1
 		
-		faca{
+		
 		se(casa == 0){
 			velha[0][0] = simbolo1
 		}senao se(casa == 1){
@@ -137,7 +139,7 @@ programa
 					} senao se(x == 2){
 						contadorVitoria2 ++
 					}
-					escreva("Deseja jogar novamente? Digite 1 para sim e 2 para não.")
+					escreva("\n\nDeseja jogar novamente? Digite 1 para sim e 2 para não.")
 					leia(repetirJogo)
 					}enquanto(repetirJogo == 1)
 				
