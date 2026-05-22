@@ -142,6 +142,9 @@ programa
 					escreva("\n\nDeseja jogar novamente? Digite 1 para sim e 2 para não.")
 					leia(repetirJogo)
 					}enquanto(repetirJogo == 1)
+					se(repetirJogo == 2){
+						inicio()
+					}
 				
 		}senao se(escolher == 2){
 			mostrarPlacar(jogador1,jogador2, contadorVitoria1, contadorVitoria2)
