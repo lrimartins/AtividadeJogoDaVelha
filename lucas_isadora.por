@@ -3,7 +3,7 @@ programa
 	//Lucas Ribeiro Martins - Isadora 
 
 
-	funcao  iniciarJogo(cadeia velha [][], cadeia jogador1, cadeia jogador2, cadeia simbolo1, cadeia simbolo2, inteiro verificador){
+	funcao  inteiro iniciarJogo(cadeia velha [][], cadeia jogador1, cadeia jogador2, cadeia simbolo1, cadeia simbolo2){
 		inteiro casa
 		escreva("Escolha uma casa de 1 a 9 para marcar ", jogador1,": ")
 		leia(casa)
@@ -30,6 +30,11 @@ programa
 			velha[2][2] = simbolo1
 		}
 
+		se(verificarGanhador(velha) == 1){
+			escreva("Jogador ", jogador1, " ganhou o jogo")
+			retorne 1
+		}
+
 		escreva("Escolha uma casa de 1 a 9 para marcar ", jogador2,": ")
 		leia(casa)
 		casa = casa - 1
@@ -54,18 +59,21 @@ programa
 		}senao se(casa == 8){
 			velha[2][2] = simbolo2
 		}
-			
+			se(verificarGanhador(velha) == 1){
+			escreva("Jogador ", jogador2, " ganhou o jogo")
+			retorne 2
+			}
 		
 		}enquanto(verificarGanhador(velha) == 0)
 		
-	
+		retorne 0
 
 	}
 
-	funcao verificarGanhador(cadeia jogo[][]){
+	funcao inteiro verificarGanhador(cadeia jogo[][]){
 		inteiro linha, coluna
 		para(linha=0; linha <=2; linha ++){
-			se(jogo[linha][0] != "" e jogo[linha][0] == jogo[linha][1] e jogo[linha][2]){
+			se(jogo[linha][0] != "" e jogo[linha][0] == jogo[linha][1] e jogo[linha][1] == jogo[linha][2]){
 			retorne 1
 			}
 			para(coluna=0; coluna <=2; coluna ++){
@@ -79,7 +87,9 @@ programa
 				retorne 1
 			}
 
-			retorne 0
+		}
+		retorne 0
+	}
 
 	funcao placarJogo(){
 		
@@ -89,7 +99,10 @@ programa
 		
 	}
 
-	funcao mostrarPlacar(){
+	funcao mostrarPlacar(cadeia jogador1, cadeia jogador2, inteiro contadorVitoria1, inteiro contadorVitoria2){
+		escreva("Placar")
+		escreva("\n\nO jogador ", jogador1," tem ", contadorVitoria1, " vitoria(s)")
+		escreva("\n\nO jogador ", jogador2," tem ", contadorVitoria2, " vitoria(s)\n\n")
 		
 	}
 	
@@ -97,9 +110,9 @@ programa
 	funcao inicio()
 	{
 		cadeia jogo[3][3]
-		inteiro matriz, escolher, contadorVitoria1, contadorVitoria2, x
-		caracter simbolo1, simbolo2
-		cadeia jogador1, jogador2
+		inteiro matriz, escolher, contadorVitoria1=0, contadorVitoria2=0, x, repetirJogo
+		cadeia simbolo1, simbolo2
+		cadeia jogador1 = "Jogador 1", jogador2 = "Jogador 2"
 		
 		faca  {
 		
@@ -108,6 +121,7 @@ programa
 		
 			
 		se(escolher == 1){
+			
 			escreva("Qual o nome do primeiro jogador: ")
 				leia(jogador1)
 			escreva("Qual o nome do segundo jogador: ")
@@ -116,25 +130,33 @@ programa
 				leia(simbolo1)
 			escreva("Jogador ", jogador2," escolha qual simbolo você quer usar, X ou O: ")
 				leia(simbolo2)
-					iniciarJogo(jogo, jogador1, jogador2, simbolo1, simbolo2)
-			
-		se(x == 1){
-			contadorVitoria1
-		}senao{
-			contadorVitoria2
-		}
-						
+				faca{
+					x = iniciarJogo(jogo, jogador1, jogador2, simbolo1, simbolo2)
+					se(x == 1){
+						contadorVitoria1 ++
+					} senao se(x == 2){
+						contadorVitoria2 ++
+					}
+					escreva("Deseja jogar novamente? Digite 1 para sim e 2 para não.")
+					leia(repetirJogo)
+					}enquanto(repetirJogo == 1)
+				
 		}senao se(escolher == 2){
-			placarJogo()
+			mostrarPlacar(jogador1,jogador2, contadorVitoria1, contadorVitoria2)
+		
+		
+						
 		}senao se(escolher == 3){
-			mostrarPlacar()
+			
+		
 						
 		}senao{
 			escreva("Numero incorreto digite novamente: ")
 			leia(escolher)
-						
 		}
-					
+						
+		
+				
 
 	}enquanto(escolher <= 0 ou escolher >= 4)
 
