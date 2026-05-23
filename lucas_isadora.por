@@ -1,6 +1,6 @@
 programa
 {
-	//Lucas Ribeiro Martins - Isadora 
+	//Lucas Ribeiro Martins - Isadora Aparecida de Oliveira Cavalcante
 
 
 	funcao  inteiro iniciarJogo(cadeia velha [][], cadeia jogador1, cadeia jogador2, cadeia simbolo1, cadeia simbolo2){
