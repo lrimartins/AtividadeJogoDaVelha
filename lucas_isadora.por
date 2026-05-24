@@ -101,8 +101,8 @@ programa
 		
 	}
 
-	funcao mostrarPlacar(cadeia jogador1, cadeia jogador2, inteiro contadorVitoria1, inteiro contadorVitoria2){
-		escreva("Placar")
+	funcao mostrarPlacar(cadeia jogador1, cadeia jogador2, inteiro &contadorVitoria1, inteiro &contadorVitoria2){
+		escreva("\nPlacar")
 		escreva("\n\nO jogador ", jogador1," tem ", contadorVitoria1, " vitoria(s)")
 		escreva("\n\nO jogador ", jogador2," tem ", contadorVitoria2, " vitoria(s)\n\n")
 		
@@ -112,16 +112,17 @@ programa
 	funcao inicio()
 	{
 		cadeia jogo[3][3]
-		inteiro matriz, escolher, contadorVitoria1=0, contadorVitoria2=0, x, repetirJogo
+		inteiro matriz, escolher, contadorVitoria1=0, contadorVitoria2=0, x = 0, repetirJogo, partidas = 0, linha, coluna
 		cadeia simbolo1, simbolo2
 		cadeia jogador1 = "Jogador 1", jogador2 = "Jogador 2"
+
 		
 		faca  {
 		
-		escreva("             --Menu--\n\n            1 - Jogar\n\n   2 - Ver placar de vencedores X e O\n\n       3 - Sair do programa\n\n")
+		escreva("\n\n             --Menu--\n\n            1 - Jogar\n\n   2 - Ver placar de vencedores X e O\n\n       3 - Sair do programa\n\n")
 		leia(escolher)
 		
-			
+		
 		se(escolher == 1){
 			
 			escreva("Qual o nome do primeiro jogador: ")
@@ -132,19 +133,29 @@ programa
 				leia(simbolo1)
 			escreva("Jogador ", jogador2," escolha qual simbolo você quer usar, X ou O: ")
 				leia(simbolo2)
-				faca{
+				
+				
+				
+					
+					faca{
 					x = iniciarJogo(jogo, jogador1, jogador2, simbolo1, simbolo2)
 					se(x == 1){
 						contadorVitoria1 ++
+						partidas++
 					} senao se(x == 2){
 						contadorVitoria2 ++
+						partidas++
+					}
+					para(linha=0; linha <=2; linha++){
+						para(coluna=0; coluna<=2; coluna++){
+							jogo[linha][coluna] = ""
+						}
 					}
 					escreva("\n\nDeseja jogar novamente? Digite 1 para sim e 2 para não.")
 					leia(repetirJogo)
 					}enquanto(repetirJogo == 1)
-					se(repetirJogo == 2){
-						inicio()
-					}
+				
+		
 				
 		}senao se(escolher == 2){
 			mostrarPlacar(jogador1,jogador2, contadorVitoria1, contadorVitoria2)
@@ -152,18 +163,21 @@ programa
 		
 						
 		}senao se(escolher == 3){
+			escreva("\nO numero de partidas jogadas foi: ", partidas)
 			
+			
+			pare
 		
 						
 		}senao{
-			escreva("Numero incorreto digite novamente: ")
-			leia(escolher)
+			escreva("\nNumero incorreto digite novamente: ")
+			
 		}
 						
 		
 				
 
-	}enquanto(escolher <= 0 ou escolher >= 4)
+	}enquanto(escolher != 3)
 
 		
 	}
